@@ -1,0 +1,27 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+@media print {
+    .hide-on-print {
+        display: none;
+    }
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.centered-content {
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 0 auto;/
+}

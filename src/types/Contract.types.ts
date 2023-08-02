@@ -1,0 +1,38 @@
+export interface CustomerFormData {
+    iin: string;
+    fullname: string;
+    passNumber: number;
+    phone_number: string;
+    city: string;
+    address: string;
+    birthDate: string;
+    dateOfIssue: string; 
+    email: string;
+}
+
+export interface ProductFormData {
+    condition: string;
+    productType: string;
+    category: string;
+    model: string;
+    memory: string;
+    packaging: boolean;
+    serialNumber: string | null; 
+    imei: number;
+    description: string;
+    days: number;
+    sum: number;
+    confirmSum: number;
+}
+
+export interface TicketData {
+    client: CustomerFormData
+    product: ProductFormData
+}
+
+
+export interface FormedContractDataResponse {
+    id: number,
+    client: CustomerFormData,
+    product: ProductFormData
+}
