@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
-import { useGetContractQuery } from "../store/TicketReducer/ticketApi"
+import { useGetContractQuery, useToggleIssuedFalseToTrueMutation } from "../store/TicketReducer/ticketApi"
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import { Grid } from "@mui/material";
 import { userApi } from "../store/userReducer/userApi";
+import { useEffect } from "react";
 
 
 const Contract = () => {
@@ -16,6 +17,19 @@ const Contract = () => {
     const { data: contract } = useGetContractQuery(parsedId);
     const { data: userData } = userApi.useGetUserInformationQuery('');
 
+    const [toggleToTrue, {isSuccess: toggleToTrueIsSuccess}] = useToggleIssuedFalseToTrueMutation();
+
+    const handleClick = () => {
+        toggleToTrue(parsedId)
+        print()
+    }
+
+    useEffect(() => {
+        if (toggleToTrueIsSuccess) {
+            alert("success")
+        }
+    }, [toggleToTrueIsSuccess])
+
 
 
     return (
@@ -23,10 +37,10 @@ const Contract = () => {
             <Box sx={{ flexGrow: 1, marginBottom: 3 }} className="hide-on-print">
                 <AppBar position="static">
                     <Toolbar>
-                        <Button variant="contained" color="warning" sx={{ marginRight: 4 }}>
+                        <Button variant="contained" color="warning" sx={{ marginRight: 4 }} onClick={() => alert("в разработке")}>
                             Send SMS
                         </Button>
-                        <Button variant="contained" color="error" onClick={print}>
+                        <Button variant="contained" color="error" onClick={handleClick}>
                             Print
                         </Button>
                     </Toolbar>
