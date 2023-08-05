@@ -6,7 +6,7 @@ export interface CustomerFormData {
     city: string;
     address: string;
     birthDate: string;
-    dateOfIssue: string; 
+    dateOfIssue: string;
     email: string;
 }
 
@@ -17,7 +17,7 @@ export interface ProductFormData {
     model: string;
     memory: string;
     packaging: boolean;
-    serialNumber: string | null; 
+    serialNumber: string | null;
     imei: number;
     description: string;
     days: number;
@@ -31,8 +31,26 @@ export interface TicketData {
 }
 
 
+export interface ProductFormDataResponse {
+    condition: string;
+    productType: string;
+    category: string;
+    model: string;
+    memory: string;
+    packaging: boolean;
+    serialNumber: string | null;
+    imei: number;
+    description: string;
+    days: number;
+    sum: number;
+    confirmSum: number;
+    today: Date; 
+    lastPaymentDate: Date | null;
+    sumToBuyout: number;
+}
+
 export interface FormedContractDataResponse {
     id: number,
     client: CustomerFormData,
-    product: ProductFormData
+    product: ProductFormDataResponse
 }

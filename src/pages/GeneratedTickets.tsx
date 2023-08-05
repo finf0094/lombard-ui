@@ -35,6 +35,7 @@ export default function GeneratedTickets() {
             <TableCell component="th" scope="row">Contract Name</TableCell>
             <TableCell align="right">Product Model</TableCell>
             <TableCell align="right">Phone Number</TableCell>
+            <TableCell align="right">Last Day</TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
@@ -52,7 +53,11 @@ export default function GeneratedTickets() {
               </TableCell>
               <TableCell align="right">{formedContract.product?.model}</TableCell>
               <TableCell align="right">{formedContract.client?.phone_number}</TableCell>
+
               <TableCell align="right">
+                  {formedContract.product?.lastPaymentDate?.toString()}</TableCell>
+              <TableCell align="right">
+
                 <Button variant='contained' color='error' onClick={() => deleteFormedContract(formedContract.id)}>DELETE</Button>
               </TableCell>
             </TableRow>

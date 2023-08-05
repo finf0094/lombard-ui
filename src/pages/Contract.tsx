@@ -4,7 +4,6 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import { Grid } from "@mui/material";
 import { userApi } from "../store/userReducer/userApi";
 import { useEffect } from "react";
 
@@ -14,13 +13,15 @@ const Contract = () => {
     const parsedId = id ? parseInt(id, 10) : undefined
 
 
-    const { data: contract } = useGetContractQuery(parsedId);
+    const { data: contract } = useGetContractQuery(parsedId !== undefined ? parsedId : 0);
     const { data: userData } = userApi.useGetUserInformationQuery('');
 
     const [toggleToTrue, {isSuccess: toggleToTrueIsSuccess}] = useToggleIssuedFalseToTrueMutation();
 
     const handleClick = () => {
-        toggleToTrue(parsedId)
+        if (parsedId !== undefined) {
+            toggleToTrue(parsedId);
+        }
         print()
     }
 
