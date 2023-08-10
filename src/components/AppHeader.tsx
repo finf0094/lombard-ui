@@ -151,7 +151,7 @@ export default function AppHeader({ children }: { children: React.ReactNode }) {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap component="div">
-                            Система TBSy
+                            TBS
                         </Typography>
                     </Box>
 

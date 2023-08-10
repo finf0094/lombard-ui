@@ -7,6 +7,7 @@ import { useAppDispatch } from "./hooks/hooks";
 import { setUser } from "./store/authReducer/authSlice";
 import PrivateRoute from "./components/PrivateRoute";
 import AppHeader from "./components/AppHeader";
+import TicketSale from "./pages/TicketSale"
 import TicketForm from "./pages/TicketForm";
 import Generated from "./pages/GeneratedTickets";
 import Contracts from "./pages/Contracts";
@@ -27,6 +28,7 @@ const routeConfigs: RouteConfig[] = [
   { path: "/contracts", component: Contracts, isPrivate: true },
   // isPrivate should be true for "/contract/:id" route
   { path: "/contract/:id", component: Contract, isPrivate: true },
+  { path: "/return-contract/:id", component: TicketSale, isPrivate: true}
 ];
 
 const App: FC = () => {
@@ -50,7 +52,7 @@ const App: FC = () => {
                 isPrivate ? (
                   <PrivateRoute>
                     {/* Check if the path is "/contract/:id", if yes, render the component without AppHeader */}
-                    {path === "/contract/:id" ? (
+                    {path === "/contract/:id" && "/return-contract/:id" ? (
                       <Component />
                     ) : (
                       <AppHeader>

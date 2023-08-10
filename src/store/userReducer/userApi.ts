@@ -24,6 +24,7 @@ interface IUserData {
     username: string
     email: string
     roles: IRole[]
+    totalAmountIssued: number
 }
 
 

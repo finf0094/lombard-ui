@@ -67,7 +67,7 @@ const Contracts: FC = () => {
                 <TableCell align="right">{formedContract.product?.model}</TableCell>
                 <TableCell align="right">{formedContract.client?.phone_number}</TableCell>
                 <TableCell align="right">
-                  <Button variant='contained' color='error' >DELETE</Button>
+                  <Button variant='contained' color='error' >Возврат</Button>
                 </TableCell>
               </TableRow>
             ))}

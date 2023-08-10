@@ -8,7 +8,7 @@ import { RootState } from "../store/store";
 import { useEffect } from "react";
 import { useCreateTicketMutation } from "../store/TicketReducer/ticketApi";
 import { useNavigate } from "react-router-dom";
-
+import Percent from "../components/Percent"
 
 
 const CustomerForm: React.FC = () => {
@@ -85,9 +85,9 @@ const ProductForm: React.FC = () => {
         dispatch(setProduct(productData));
     };
 
-    const {sum} = useAppSelector((state: RootState) => state.ticket.product);
+    const { sum, days } = useAppSelector((state: RootState) => state.ticket.product);
 
-    
+
     return (
         <Box sx={{ display: 'flex', width: '100%', flexDirection: 'column' }}>
             <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2, width: '100%', background: 'radial-gradient(circle, rgba(255,0,228,1) 0%, rgba(0,108,255,1) 100%)', textAlign: 'center' }}>
@@ -174,7 +174,7 @@ const ProductForm: React.FC = () => {
                         <Button variant="outlined" color="primary" type="submit">
                             Добавить в базу товар
                         </Button>
-                        {sum ? <h2>{sum}</h2> : ''}
+                        {sum ? <Percent sum={sum} days={days} /> : ''}
                     </Grid>
                 </Grid>
             </form>
@@ -185,28 +185,29 @@ const ProductForm: React.FC = () => {
 const TicketForm: React.FC = () => {
     const navigate = useNavigate();
     const { ticket } = useAppSelector((state: RootState) => state);
-  
-    const [createTicketMutation, {isSuccess: isTicketAddSuccess, isError: isTicketAddError}] = useCreateTicketMutation(); 
-  
-    const handleCreateTicket = () => {
-      createTicketMutation(ticket) 
-    };
-    
-    useEffect(() => {
-      if (isTicketAddSuccess) {
-        navigate("/generated")
-      }
-    }, [isTicketAddSuccess, navigate]);
-  
-    return (
-      <div>
-        <CustomerForm />
-        <ProductForm />
-        <button onClick={handleCreateTicket}>оформить</button>
 
-        {isTicketAddError ? <h2>Ошибка попробуйте снова</h2>: ""}
-      </div>
+    const [createTicketMutation, { isSuccess: isTicketAddSuccess, isError: isTicketAddError }] = useCreateTicketMutation();
+
+    const handleCreateTicket = () => {
+        createTicketMutation(ticket)
+    };
+
+    useEffect(() => {
+        if (isTicketAddSuccess) {
+            navigate("/generated")
+        }
+    }, [isTicketAddSuccess, navigate]);
+
+    return (
+        <div>
+            <CustomerForm />
+            <ProductForm />
+            <Button variant="contained" color="success" onClick={handleCreateTicket} sx={{mt: 2}}>оформить</Button>
+
+
+            {isTicketAddError ? <h2>Ошибка попробуйте снова</h2> : ""}
+        </div>
     );
-  };
+};
 
 export default TicketForm;
