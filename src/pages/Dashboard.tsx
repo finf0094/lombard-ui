@@ -11,8 +11,12 @@ export const Dashboard: FC = () => {
 
   return (
     <Grid>
-      {isUserDataLoading ? <CircularProgress color="secondary"/> : <div>
-        Name: {userData?.username}
+      {isUserDataLoading ? <CircularProgress color="secondary" /> : <div>
+
+        <h2>
+          Name: {userData?.fullName}
+        </h2>
+        login: {userData?.username}
         Email : {userData?.email}
         role: {userData?.roles.map(role => <h2 key={role.id}>{role.name}</h2>)}
         <h2>Общая сумма выдач: {userData?.totalAmountIssued}</h2>

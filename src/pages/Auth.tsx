@@ -23,6 +23,8 @@ const Auth: FC = () => {
 
   if (isError) {
     console.log("Произошла ошибка при аутентификаций")
+    console.log(isError)
+
   }
 
   useEffect(() => {
@@ -36,6 +38,7 @@ const Auth: FC = () => {
     e.preventDefault();
     loginUserMutation(loginFormData);
   }
+
 
 
 
@@ -122,6 +125,7 @@ const Auth: FC = () => {
               Sign In
             </Button>
           </Box>
+          {isError ? "Ошибка при аутентификаций" : ""}
         </Box>
       </Container>
     </ThemeProvider>

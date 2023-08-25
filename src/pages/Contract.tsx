@@ -99,7 +99,7 @@ const Contract = () => {
 
                 <div className="row">
                     <h3>{contract?.client.fullname}___________</h3>
-                    <h3>{userData?.username}________</h3>
+                    <h3>{userData?.fullName}________</h3>
                 </div>
             </div>
 

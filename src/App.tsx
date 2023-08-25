@@ -4,7 +4,7 @@ import Auth from "./pages/Auth";
 
 import { Dashboard } from "./pages/Dashboard";
 import { useAppDispatch } from "./hooks/hooks";
-import { setUser } from "./store/authReducer/authSlice";
+import { logoutUser, setUser } from "./store/authReducer/authSlice";
 import PrivateRoute from "./components/PrivateRoute";
 import AppHeader from "./components/AppHeader";
 import TicketSale from "./pages/TicketSale"
@@ -12,6 +12,7 @@ import TicketForm from "./pages/TicketForm";
 import Generated from "./pages/GeneratedTickets";
 import Contracts from "./pages/Contracts";
 import Contract from "./pages/Contract";
+import { userApi } from "./store/userReducer/userApi";
 
 interface RouteConfig {
   path: string;
@@ -28,16 +29,20 @@ const routeConfigs: RouteConfig[] = [
   { path: "/contracts", component: Contracts, isPrivate: true },
   // isPrivate should be true for "/contract/:id" route
   { path: "/contract/:id", component: Contract, isPrivate: true },
-  { path: "/return-contract/:id", component: TicketSale, isPrivate: true}
+  { path: "/ticket-sale/:id", component: TicketSale, isPrivate: true}
 ];
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
+  const {isError: isUserGetDataError} = userApi.useGetUserInformationQuery('');
 
   useEffect(() => {
+    if (isUserGetDataError) {
+      dispatch(logoutUser())
+    }
     const token = JSON.parse(localStorage.getItem("token") || "{}");
     dispatch(setUser(token));
-  }, [dispatch]);
+  }, [dispatch, isUserGetDataError]);
 
   return (
     <div>

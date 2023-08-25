@@ -9,9 +9,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useNavigate } from "react-router-dom";
 
 
 const Contracts: FC = () => {
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [isEnterPressed, setIsEnterPressed] = useState(false);
 
@@ -29,6 +31,9 @@ const Contracts: FC = () => {
       setIsEnterPressed(false);
     }
   };
+
+  console.log(contracts)
+
 
   return (
     <div>
@@ -67,7 +72,9 @@ const Contracts: FC = () => {
                 <TableCell align="right">{formedContract.product?.model}</TableCell>
                 <TableCell align="right">{formedContract.client?.phone_number}</TableCell>
                 <TableCell align="right">
-                  <Button variant='contained' color='error' >Возврат</Button>
+                  {formedContract.contractStatus?.name == "issued" ?
+                   <Button variant='contained' color='error' onClick={() => navigate("/ticket-sale/" + formedContract.id)} >Возврат</Button> :
+                   <Button variant="contained" color="info">Полный Возврат кредита</Button>}
                 </TableCell>
               </TableRow>
             ))}

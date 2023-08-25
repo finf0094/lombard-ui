@@ -23,6 +23,7 @@ interface IRole {
 interface IUserData {
     username: string
     email: string
+    fullName: string
     roles: IRole[]
     totalAmountIssued: number
 }

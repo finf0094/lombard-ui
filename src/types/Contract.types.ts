@@ -49,8 +49,14 @@ export interface ProductFormDataResponse {
     sumToBuyout: number;
 }
 
+interface contractStatus {
+    id: number,
+    name: string
+}
+
 export interface FormedContractDataResponse {
     id: number,
+    contractStatus: contractStatus
     client: CustomerFormData,
     product: ProductFormDataResponse
 }
