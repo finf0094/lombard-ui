@@ -5,12 +5,14 @@ import "./app.css"
 import { Provider } from 'react-redux'
 import { store } from './store/store.ts'
 import { BrowserRouter } from 'react-router-dom'
-
+import { ThemeContextProvider } from './theme/ThemeContextProvider.tsx'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <ThemeContextProvider>
+          <App />
+        </ThemeContextProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

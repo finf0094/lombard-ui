@@ -22,12 +22,11 @@ const Percent = ({ sum, days }: props) => {
         const currentDate = new Date(startDate.getTime() + i * millisecondsInDay);
         
         const percent = sum * (i + 1) * 0.01;
-        const totalWithPercentage = sum + percent;
 
         rows.push(
             <TableRow key={i} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell align='left'>{currentDate.toLocaleDateString()}</TableCell>
-                <TableCell>{totalWithPercentage}</TableCell>
+                <TableCell>{sum} + {percent}</TableCell>
             </TableRow>
         );
     }

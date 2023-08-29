@@ -22,6 +22,9 @@ import { Button } from '@mui/material';
 import { useAppDispatch } from '../hooks/hooks';
 import { logoutUser } from '../store/authReducer/authSlice';
 import { useNavigate } from 'react-router-dom';
+import { useThemeContext } from '../theme/ThemeContextProvider';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 const drawerWidth = 240;
 
@@ -105,6 +108,7 @@ export default function AppHeader({ children }: { children: React.ReactNode }) {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [open, setOpen] = React.useState(false);
+    const {toggleColorMode, theme: th} = useThemeContext();
 
     const pathRoutes: IPathRoute[] = [
     { id: 1, text: 'Профиль', path: '/dashboard' },
@@ -153,7 +157,7 @@ export default function AppHeader({ children }: { children: React.ReactNode }) {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap component="div">
-                            TBS
+                            <Button onClick={toggleColorMode}>{th.palette?.mode == 'light' ? <DarkModeIcon color="secondary" /> : <LightModeIcon color="primary" />}</Button>
                         </Typography>
                     </Box>
 

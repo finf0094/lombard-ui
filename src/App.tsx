@@ -13,6 +13,8 @@ import Generated from "./pages/GeneratedTickets";
 import Contracts from "./pages/Contracts";
 import Contract from "./pages/Contract";
 import { userApi } from "./store/userReducer/userApi";
+import { useThemeContext } from "./theme/ThemeContextProvider";
+import { ThemeProvider } from "@mui/material";
 
 interface RouteConfig {
   path: string;
@@ -29,12 +31,13 @@ const routeConfigs: RouteConfig[] = [
   { path: "/contracts", component: Contracts, isPrivate: true },
   // isPrivate should be true for "/contract/:id" route
   { path: "/contract/:id", component: Contract, isPrivate: true },
-  { path: "/ticket-sale/:id", component: TicketSale, isPrivate: true}
+  { path: "/ticket-sale/:id", component: TicketSale, isPrivate: true }
 ];
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
-  const {isError: isUserGetDataError} = userApi.useGetUserInformationQuery('');
+  const { theme } = useThemeContext();
+  const { isError: isUserGetDataError } = userApi.useGetUserInformationQuery('');
 
   useEffect(() => {
     if (isUserGetDataError) {
@@ -60,13 +63,17 @@ const App: FC = () => {
                     {path === "/contract/:id" && "/return-contract/:id" ? (
                       <Component />
                     ) : (
-                      <AppHeader>
-                        <Component />
-                      </AppHeader>
+                      <ThemeProvider theme={theme}>
+                        <AppHeader>
+                          <Component />
+                        </AppHeader>
+                      </ThemeProvider>
                     )}
                   </PrivateRoute>
                 ) : (
-                  <Component />
+                  <ThemeProvider theme={theme}>
+                    <Component />
+                  </ThemeProvider>
                 )
               }
             />
